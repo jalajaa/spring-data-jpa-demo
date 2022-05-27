@@ -1,0 +1,42 @@
+
+        /* if (opt.isPresent()) {
+             Book book=opt.get();
+            System.out.println(book);
+            
+            book.setAuthor("testing");
+            
+            //Page pagex=new Page(222, "poda dai", "yennamo po", book);
+            
+            //book.getPages().add(pagex);
+            //book.getPages().clear();
+            
+            Set<Page> bpages=book.getPages();
+            bpages.remove(1);
+            //bpages.clear();
+            book.setPages(bpages);
+            
+            
+            for (Page page : book.getPages()) {
+                   System.out.println("next page");
+                   System.out.println(page);
+            }
+            
+            //removePageFromBook(book,2);
+            
+            //updatePageInBook(book,3)
+            
+            bookRepository.save(book);
+            
+            pages.clear();
+            
+            
+            for (Page page : book.getPages()) {
+                   System.out.println(page);
+            }
+            
+            
+            
+        } else {
+            System.out.println("No Record found!");
+            throw new Exception("Record Not Found!");
+        }*/
