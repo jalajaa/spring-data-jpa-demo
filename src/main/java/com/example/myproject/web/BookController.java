@@ -69,15 +69,11 @@ public class BookController {
         
     }
 
-	/*@GetMapping("/greeting")
-	public String greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
-		return String.format(template, name);
-	}*/
-	
 	@GetMapping("/addPageToBook/{isbn}")
 	public void addPageToBook(@PathVariable(value = "isbn") String isbn)  throws Exception { 
 	    
 	    System.out.println("Entering addPageToBook...");
+
 	    //Find Existing Book by isbn
 	    Book book= bookRepository.findByIsbn(isbn);
 	    
@@ -109,30 +105,30 @@ public class BookController {
 @GetMapping("/updateParent/{isbn}")
 public void updateParent(@PathVariable(value = "isbn") String isbn) throws Exception { 
 
-     System.out.println("Entering updateParent...");
-	   
-	    //Find Existing Book by isbn
-	    Book book= bookRepository.findByIsbn(isbn);
+    System.out.println("Entering updateParent...");
+   
+    //Find Existing Book by isbn
+    Book book= bookRepository.findByIsbn(isbn);
 
-	    //If book not found for isbn passed
-	     if(null==book){
-	         System.out.println("Book not found for isbn");
-	         throw  new Exception("No Records found");
-	     }
+    //If book not found for isbn passed
+     if(null==book){
+         System.out.println("Book not found for isbn");
+         throw  new Exception("No Records found");
+     }
 	     
-	     System.out.println("Book object found");
-	     System.out.println(book);
+	   System.out.println("Book object found");
+	   System.out.println(book);
 
      
-     System.out.println("Getting page collection from book object...");
-     List<Page> pageList=book.getPages();
+    System.out.println("Getting page collection from book object...");
+    List<Page> pageList=book.getPages();
      
      
      System.out.println("Converting page collection List from book object TO MAP...");
      Map<String,Page> pageMap=listToMap(pageList);
      
      
-     System.out.println("Deleting the 1st Page Object, one with PageId as 2 ");
+     System.out.println("Deleting the 1st Page Object,one with PageId as 2 ");
      // Delete 1st Page Object, PageId is 2
      long pageIdToDelete=2;
      Page deletedPageObj=pageMap.remove(pageIdToDelete+"");
@@ -151,8 +147,8 @@ public void updateParent(@PathVariable(value = "isbn") String isbn) throws Excep
      
      System.out.println("Create 2 new Page Objects...");
      // Add 2 New Random Page Objects
-     Page pagen1=new Page(1, "Introduction contents", "Introduction", book);
-     Page pagen2=new Page(1, "Introduction contents", "Introduction", book);
+     Page pagen1=new Page(111, "Introduction contents", "Introduction", book);
+     Page pagen2=new Page(222, "Summary contents", "Ending", book);
      
      
      System.out.println("Converting Map to List...");
@@ -170,15 +166,25 @@ public void updateParent(@PathVariable(value = "isbn") String isbn) throws Excep
      book.getPages().clear();
      
      System.out.println("Associating the Updated Page Entity Collection to Book Entity");
+     
+     
      book.getPages().addAll( (ArrayList<Page>) pageList);
+     
+     //for (Page page : pageList) {
+            //pageList.add(pagen1);
+            //pageList.add(pagen2);
+      //}
+
+    //book.getPages().add(pagen1);
+    //book.getPages().add(pagen2);
      
      
      System.out.println("Saving the Book with updated pages...");
      //Save the book
      Book bookUpd=bookRepository.save(book);
- 	   System.out.println("Updated book with pages...");
- 	   System.out.println(bookUpd);
- 	   System.out.println("Leaving updateParent.");
+     System.out.println("Updated book with pages...");
+     System.out.println(bookUpd);
+     System.out.println("Leaving updateParent.");
 }
 	
 	@GetMapping("/updateBookPageById/{isbn}/{pageId}")
@@ -265,7 +271,7 @@ public void updateParent(@PathVariable(value = "isbn") String isbn) throws Excep
    
 	}
 	
-	@GetMapping("/book/{id}")
+	/*@GetMapping("/book/{id}")
 	public void getBookByIsbn(@PathVariable(value = "id") long id) throws Exception { 
 	     System.out.println("Received id:" + id);
 	     Book book= bookRepository.findById(id);
@@ -275,6 +281,6 @@ public void updateParent(@PathVariable(value = "isbn") String isbn) throws Excep
 	     }
          
          System.out.println(book);
-	}
+	}*/
 	
 }
