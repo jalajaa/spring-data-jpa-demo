@@ -31,8 +31,14 @@ import com.example.myproject.repository.PageRepository;
 
 import java.util.*;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
 @SpringBootApplication
 public class DemoApplication {
+
+private static final Logger LOGGER=LoggerFactory.getLogger(DemoApplication.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
@@ -62,6 +68,7 @@ public class DemoApplication {
 
     public void one2many(BookRepository bookRepository,PageRepository pageRepository){
                 
+            LOGGER.info("Entering one2many...");
               // create a new book
             Book book = new Book("Java 101", "John Doe", "123456");
 
@@ -77,33 +84,13 @@ public class DemoApplication {
             book.setPages(pages);
 
             // save the book
-            System.out.println(book);
+            LOGGER.info("Saving Book:{}",book);
 
 
             Book book_saved=bookRepository.save(book);
             
-            System.out.println(book_saved);
-            
-            //book_saved.getPages().clear();
-            
-            //bookRepository.save(book_saved);
-            
-            /*Book book2 = new Book("Java 102", "SBalan", "654321");
-
-            Page page4=new Page(1, "Demo contents", "Introduction", book);
-            Page page5=new Page(65, "Java 17 8 contents", "Java 17", book);
-
-            book2.addPage(page4);
-            book2.addPage(page5);
-            
-            Book book2_saved=bookRepository.save(book2);
-            
-            System.out.println(bookRepository.findById(book2_saved.getId()));
-            bookRepository.delete(book2);
-            System.out.println(bookRepository.findById(book2_saved.getId()));*/
-            
-            
-
+            LOGGER.info("Saved Book: {}",book_saved);
+            LOGGER.info("Leaving one2many...");
     }
 	
 	@Bean
@@ -114,9 +101,8 @@ public class DemoApplication {
         return args -> {
 
             one2many(bookRepository,pageRepository);
+            
         };
-        
-        
     }
 	
 	
