@@ -7,3 +7,4 @@ git config -l
 git config --global credential.helper cache
 git config --global --unset credential.helper
 testing
+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
