@@ -6,3 +6,4 @@ git config --global user.email "jalaja.chn.in@gmail.com"
 git config -l
 git config --global credential.helper cache
 git config --global --unset credential.helper
+testing
